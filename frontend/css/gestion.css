@@ -1,0 +1,255 @@
+/* =============================================
+   GESTIÓN DE EMPLEADOS - Página de listado y consultas
+   ============================================= */
+
+/* =======================
+   VARIABLES - Tema verde consistente
+   ======================= */
+:root{
+  /* Paleta base en verde (coincide con la UI principal) */
+  --brand-primary:#065f46;   /* Verde principal barra superior */
+  --brand-primary-2:#064a2f; /* Verde oscuro para degradados */
+  --brand-accent:#16a34a;    /* Verde para botones primarios */
+
+  /* Colores neutros */
+  --text:#1a1f2b;            /* Texto principal */
+  --muted:#6b7280;           /* Texto secundario */
+  --bg:#f4f6f9;              /* Fondo de la página */
+  --card:#ffffff;            /* Fondo de tarjetas */
+  --border:#e5e7eb;          /* Color de bordes */
+
+  /* Variables de diseño */
+  --radius:16px;             /* Border-radius estándar */
+  --shadow:0 6px 24px rgba(0,0,0,.08); /* Sombra estándar */
+  --shadow-soft:0 3px 12px rgba(0,0,0,.06); /* Sombra sutil */
+}
+
+/* =======================
+   TOPBAR - Barra superior con navegación
+   ======================= */
+.topbar{
+  position:sticky; top:0; z-index:20; /* Se mantiene fija al hacer scroll */
+  display:flex; align-items:center; gap:12px; /* Alineación horizontal */
+  padding:14px 18px;                  /* Espaciado interno */
+  background:linear-gradient(180deg, var(--brand-primary), var(--brand-primary-2)); /* Degradado verde */
+  color:#fff;                         /* Texto blanco contrastante */
+  box-shadow:var(--shadow-soft);      /* Sombra sutil */
+}
+.topbar h1{
+  font-size:1.2rem; font-weight:700; letter-spacing:.3px; margin:0; /* Estilo del título */
+}
+.topbar .spacer{ flex:1; } /* Espaciador flexible para alinear elementos */
+.topbar .back{
+  display:inline-flex; align-items:center; justify-content:center; /* Botón circular */
+  width:36px; height:36px; border-radius:999px; /* Forma circular */
+  background:rgba(255,255,255,.15); /* Fondo semitransparente */
+  color:#fff; text-decoration:none; font-size:18px; line-height:1; /* Estilo de enlace */
+  transition:transform .15s ease, background .15s ease; /* Transiciones suaves */
+}
+.topbar .back:hover{ transform:translateX(-2px); background:rgba(255,255,255,.25); } /* Efecto hover */
+
+/* =======================
+   LAYOUT PRINCIPAL
+   ======================= */
+.container{
+  max-width:1200px; margin:20px auto; padding:0 16px; /* Contenedor centrado con márgenes */
+}
+
+/* =======================
+   TOOLBAR - Búsqueda y acciones
+   ======================= */
+.toolbar{
+  display:flex; gap:16px; align-items:center; justify-content:space-between; /* Distribución horizontal */
+  margin-bottom:16px; /* Espacio inferior */
+}
+.search-box{
+  display:flex; gap:8px; align-items:center; flex:1; /* Ocupa espacio disponible */
+  background:var(--card);          /* Fondo blanco */
+  border:1px solid var(--border);  /* Borde sutil */
+  border-radius:999px;             /* Forma completamente redondeada */
+  padding:8px 8px 8px 12px;        /* Espaciado interno */
+  box-shadow:var(--shadow-soft);   /* Sombra sutil */
+}
+.search-box input{
+  border:none; outline:none; flex:1; font-size:14px; /* Input sin bordes visibles */
+  color:var(--text); background:transparent;         /* Texto y fondo */
+}
+.actions-right{ display:flex; gap:10px; } /* Contenedor para botones derechos */
+
+/* =======================
+   TARJETA CONTENEDORA
+   ======================= */
+.card{
+  background:var(--card);          /* Fondo blanco */
+  border:1px solid var(--border);  /* Borde sutil */
+  border-radius:var(--radius);     /* Esquinas redondeadas */
+  box-shadow:var(--shadow);        /* Sombra para elevación */
+  overflow:hidden;                 /* Oculta contenido que se sale */
+}
+
+/* =======================
+   TABLA - Listado de empleados
+   ======================= */
+.table-wrapper{ width:100%; overflow:auto; } /* Contenedor con scroll horizontal */
+.grid{
+  width:100%; border-collapse:separate; border-spacing:0; /* Tabla ancho completo */
+}
+.grid thead th{
+  position:sticky; top:0; z-index:1; /* Encabezados fijos al hacer scroll */
+  background:#f9fafb; color:#111827; font-weight:600; /* Estilo de encabezado */
+  text-align:left; font-size:.92rem;                  /* Alineación y tamaño */
+  border-bottom:1px solid var(--border);              /* Línea inferior */
+  padding:12px 14px;                                  /* Espaciado interno */
+}
+.grid tbody td{
+  border-bottom:1px solid var(--border); /* Líneas separadoras entre filas */
+  padding:12px 14px; font-size:.95rem; color:#111827; /* Espaciado y texto */
+}
+.grid tbody tr:hover{ background:#f7fbff; } /* Fondo sutil al hover */
+.grid .actions{
+  display:flex; gap:8px; align-items:center; /* Botones de acción en fila */
+}
+
+/* =======================
+   PAGINACIÓN - Navegación entre páginas
+   ======================= */
+.pager{
+  display:flex; align-items:center; justify-content:space-between; /* Distribución horizontal */
+  padding:12px 16px;                /* Espaciado interno */
+  border-top:1px solid var(--border); /* Línea separadora superior */
+  background:#fafafa;               /* Fondo ligeramente gris */
+}
+
+/* =======================
+   SISTEMA DE BOTONES
+   ======================= */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; /* Centrado perfecto */
+  gap:8px; padding:10px 14px;        /* Espacio entre icono/texto y espaciado interno */
+  border-radius:12px; border:1px solid transparent; /* Esquinas redondeadas sin borde visible */
+  cursor:pointer; font-weight:600; font-size:.92rem; /* Interactividad y tipografía */
+  transition:transform .05s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease; /* Múltiples transiciones */
+  user-select:none;                  /* Texto no seleccionable */
+}
+.btn:active{ transform:translateY(1px); } /* Efecto de click */
+
+/* Variantes de botones */
+.btn-primary{
+  background:var(--brand-accent); color:#fff; /* Verde sólido */
+  box-shadow:0 4px 16px rgba(30,136,229,.35); /* Sombra azul */
+}
+.btn-primary:hover{ filter:brightness(1.05); } /* Efecto hover con brillo */
+
+.btn-outline{
+  background:#fff; color:var(--brand-primary); /* Blanco con texto y borde verde */
+  border-color:var(--brand-primary);
+}
+.btn-outline:hover{
+  background:rgba(14,54,112,.06); /* Fondo muy sutil al hover */
+}
+
+.btn-secondary{
+  background:#eef2ff; color:#1e3a8a; border-color:#c7d2fe; /* Tema azul suave */
+}
+.btn-secondary:hover{ background:#e0e7ff; } /* Azul más intenso al hover */
+
+.btn-danger{
+  background:#fee2e2; color:#991b1b; border-color:#fecaca; /* Tema rojo suave */
+}
+.btn-danger:hover{ background:#fecaca; } /* Rojo más intenso al hover */
+
+.btn-small{
+  padding:8px 10px; font-size:.85rem; border-radius:10px; /* Versión compacta */
+}
+
+/* =======================
+   DISEÑO RESPONSIVE
+   ======================= */
+@media (max-width: 820px){
+  .toolbar{ flex-direction:column; align-items:stretch; } /* Toolbar en columna */
+  .actions-right{ justify-content:flex-end; }            /* Botones a la derecha */
+}
+
+/* =======================
+   DETALLES DE FILA - Vista expandida
+   ======================= */
+.row-detail .detail { padding: 8px 6px; } /* Espaciado interno para detalles */
+.detail .detail-panel.hidden { display: none; } /* Ocultar panel de detalles */
+.detail .detail-panel { 
+  padding: 12px; background: #f9fafb; border:1px solid #e5e7eb; border-radius: 12px; margin-top:10px; /* Estilo del panel */
+}
+.detail .detail-grid { 
+  display:grid; grid-template-columns: repeat(3, minmax(220px,1fr)); gap:14px; /* Grid de 3 columnas */
+}
+.detail .detail-grid h4 { 
+  margin:0 0 8px; font-size:.95rem; color:#0f172a; /* Estilo de subtítulos */
+}
+@media (max-width: 980px){ .detail .detail-grid{ grid-template-columns:1fr; } } /* Una columna en tablets */
+
+/* =======================
+   COLUMNA ACCIONES - Botones en tabla
+   ======================= */
+td.col-acciones, th.col-acciones { width: 120px; } /* Ancho fijo para columna acciones */
+td.col-acciones { white-space: normal; overflow: visible; padding-top: .5rem; padding-bottom: .5rem; } /* Espaciado vertical */
+td.col-acciones .acciones-stack { 
+  display: flex; flex-direction: column; gap: 8px; align-items: flex-start; /* Botones en columna */
+}
+td.col-acciones .acciones-stack .btn { 
+  display: block; width: 100%; max-width: 100px; /* Botones de ancho consistente */
+}
+
+/* =======================
+   TEMATIZACIÓN VERDE - Ajustes de colores
+   ======================= */
+
+/* Encabezado de tabla con tono verde muy sutil */
+.grid thead th{
+  background:#f7faf9; /* Verde muy claro casi blanco */
+}
+
+/* Hover de filas con tinte verde */
+.grid tbody tr:hover{
+  background:#f1fcf6; /* Verde muy claro al hover */
+}
+
+/* Botón primario con sombra verde */
+.btn-primary{
+  background:var(--brand-accent);
+  color:#fff;
+  box-shadow:0 4px 16px rgba(22,163,74,.28); /* Sombra verde */
+}
+
+/* Outline con borde verde */
+.btn-outline{
+  background:#fff;
+  color:var(--brand-primary);
+  border-color:var(--brand-primary);
+}
+.btn-outline:hover{
+  background:rgba(11,93,59,.06); /* Verde muy sutil al hover */
+}
+
+/* Secundario con tema verde en lugar de azul */
+.btn-secondary{
+  background:#ecfdf5;  /* Verde muy claro */
+  color:#065f46;       /* Verde texto */
+  border-color:#a7f3d0;/* Borde menta */
+}
+.btn-secondary:hover{ background:#d1fae5; } /* Verde un poco más intenso */
+
+/* =======================
+   ENLACES SUPERIORES - Volver y Nuevo Empleado
+   ======================= */
+.topbar a {
+  color: #ffffff;              /* Texto blanco */
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s ease, background .2s ease; /* Transiciones suaves */
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.topbar a:hover {
+  background: rgba(255,255,255,0.15); /* Fondo semitransparente al hover */
+  color: #d1fae5;              /* Verde claro al pasar el mouse */
+}

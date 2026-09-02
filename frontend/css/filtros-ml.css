@@ -1,0 +1,139 @@
+/* =============================================
+   FILTROS MODERN LAYOUT - Panel de filtros deslizante
+   ============================================= */
+
+/* =======================
+   BACKDROP - Fondo semitransparente
+   ======================= */
+.no-scroll { overflow: hidden; } /* Previene scroll del body cuando el modal está abierto */
+
+.filtros-backdrop{
+  position: fixed; inset: 0;     /* Cubre toda la pantalla */
+  background: rgba(15, 23, 42, .45); /* Fondo azul oscuro semitransparente */
+  backdrop-filter: blur(2px);    /* Efecto de desenfoque del fondo */
+  z-index: 60;                   /* Por encima del contenido normal */
+  opacity: 0; pointer-events: none; /* Inicialmente invisible y no interactuable */
+  transition: opacity .18s ease; /* Transición suave de opacidad */
+}
+.filtros-backdrop.is-open{
+  opacity: 1; pointer-events: auto; /* Visible y interactuable cuando está abierto */
+}
+
+/* =======================
+   SHEET - Panel deslizante lateral
+   ======================= */
+.filtros-sheet{
+  position: fixed; top: 16px; right: 16px; bottom: 16px; /* Posicionado a la derecha con márgenes */
+  width: 560px; max-width: calc(100vw - 32px); /* Ancho fijo con máximo responsive */
+  background: #fff;              /* Fondo blanco */
+  border-radius: 16px;           /* Esquinas muy redondeadas */
+  box-shadow: 0 24px 60px rgba(0,0,0,.25); /* Sombra pronunciada para elevación */
+  z-index: 61;                   /* Por encima del backdrop */
+  display: grid;                 /* Layout con grid para estructura header/body/footer */
+  grid-template-rows: auto 1fr auto; /* Tres filas: header, contenido flexible, footer */
+  overflow: hidden;              /* Oculta contenido que se sale */
+
+  /* Animación de entrada */
+  transform: translateX(16px);   /* Inicia desplazado a la derecha */
+  opacity: 0;                    /* Inicia transparente */
+  transition: transform .22s ease, opacity .22s ease; /* Transiciones suaves */
+}
+.filtros-sheet.is-open{
+  transform: translateX(0);      /* Posición final - centrado */
+  opacity: 1;                    /* Completamente visible */
+}
+
+/* =======================
+   HEADER - Título y botón cerrar
+   ======================= */
+.filtros-head{
+  position: sticky; top: 0;      /* Se mantiene fijo al hacer scroll */
+  padding: 14px 18px;            /* Espaciado interno */
+  border-bottom: 1px solid #e5e7eb; /* Línea separadora */
+  background: #fff;              /* Fondo blanco */
+  display: flex; align-items: center; gap: 12px; /* Alineación horizontal */
+}
+.filtros-title{ font-weight: 700; font-size: 1rem; color: #0f172a; } /* Estilo del título */
+.filtros-close{
+  margin-left: auto;             /* Empuja el botón a la derecha */
+  width: 36px; height: 36px; border-radius: 999px; /* Botón circular */
+  display: grid; place-items: center; /* Centrado perfecto del icono */
+  border: 1px solid #e5e7eb; background: #fff; cursor: pointer; /* Estilo minimalista */
+}
+
+/* =======================
+   BODY - Contenido desplazable
+   ======================= */
+.filtros-body{
+  overflow: auto;                /* Scroll interno si el contenido excede */
+  padding: 14px 18px 6px;       /* Espaciado interno (menor abajo) */
+  background: #fcfcfd;          /* Fondo gris muy claro */
+}
+
+/* =======================
+   GRID DE CAMPOS - Layout de filtros
+   ======================= */
+.filtros-grid{
+  display: grid;                 /* Layout con CSS Grid */
+  grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
+  gap: 12px 14px;               /* Espacio entre filas y columnas */
+}
+.filtros-field{ display:flex; flex-direction:column; gap:6px; } /* Campo en columna */
+.filtros-label{ font-size:.85rem; font-weight:600; color:#111827; } /* Label compacto */
+.filtros-input,
+.filtros-input input{
+  width: 100%;                   /* Ancho completo */
+  border: 1px solid #e5e7eb;     /* Borde sutil */
+  background:#fff; border-radius: 10px; padding: 10px 12px; /* Estilo consistente */
+  font-size:.95rem; color:#111827; /* Texto legible */
+}
+
+/* =======================
+   CHIPS - Filtros tipo pastilla
+   ======================= */
+.filtros-chips{ display:flex; flex-wrap:wrap; gap:8px; } /* Layout flexible con wrap */
+.filtros-chip{
+  border:1px solid #c7d2fe; background:#eef2ff; color:#1e3a8a; /* Tema azul */
+  padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:600; /* Estilo pastilla */
+}
+.filtros-chip.is-active{ background:#dbeafe; border-color:#93c5fd; } /* Estado activo */
+
+/* =======================
+   FOOTER - Acciones inferiores
+   ======================= */
+.filtros-foot{
+  position: sticky; bottom: 0;   /* Se mantiene fijo al final */
+  border-top:1px solid #e5e7eb;  /* Línea separadora */
+  padding: 12px 16px; background:#fff; /* Espaciado y fondo */
+  display:flex; gap:10px; justify-content:flex-end; /* Botones alineados a la derecha */
+}
+
+/* =======================
+   BOTONES ESPECÍFICOS DE FILTROS
+   ======================= */
+.btn-ghost{
+  border:1px solid #e5e7eb; background:#fff; border-radius:10px; /* Estilo outline */
+  padding:10px 14px; font-weight:700; cursor:pointer;
+}
+.btn-primary{
+  border:1px solid transparent; background:#22c55e; color:#fff; /* Botón primario verde */
+  padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer;
+}
+.btn-primary:hover{ filter:brightness(1.05); } /* Efecto hover sutil */
+
+/* =======================
+   ESTADOS DE INPUTS
+   ======================= */
+.filtros-input:hover,
+.filtros-input input:hover{ border-color:#cbd5e1; } /* Borde más oscuro al hover */
+
+/* =======================
+   RESPONSIVE - Adaptación móvil
+   ======================= */
+@media (max-width: 820px){
+  .filtros-sheet{
+    left: 8px; right: 8px; top: 8px; bottom: 8px; /* Ocupa casi toda la pantalla */
+    width: auto; max-width: none; border-radius: 14px; /* Bordes ligeramente menos redondeados */
+  }
+  .filtros-grid{ grid-template-columns: 1fr; } /* Una sola columna en móvil */
+}

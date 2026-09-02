@@ -1,0 +1,13 @@
+{
+  "name": "reclutamientoalpha-desktop",
+  "version": "1.0.0",
+  "description": "Aplicación de escritorio para ReclutamientoAlpha usando Electron",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}

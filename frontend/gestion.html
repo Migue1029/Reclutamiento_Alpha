@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestión de empleados</title>
+
+  <!-- Estilos base de esta pantalla -->
+  <link rel="stylesheet" href="css/gestion.css" />
+  <!-- Estilos del panel de filtros (nuevo) -->
+  <link rel="stylesheet" href="css/filtros-ml.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="back">Volver</a>
+    <h1>Gestión de empleados</h1>
+    <div class="spacer"></div>
+  </header>
+
+  <main class="container">
+    <section class="toolbar">
+      <div class="search-box">
+        <!-- Tu búsqueda general existente -->
+        <input id="txtBuscar" type="text"
+               placeholder="Buscar por nombre, número de trabajador, puesto..." />
+        <button id="btnBuscar" class="btn btn-primary">Buscar</button>
+      </div>
+
+      <!-- Contenedor a la derecha para el botón de filtros (lo usará filtros-ml.js) -->
+      <div class="actions-right"></div>
+    </section>
+
+    <section class="card">
+      <div class="table-wrapper">
+        <table class="grid" id="tablaEmpleados" aria-label="Listado de empleados">
+          <thead>
+            <tr>
+              <th># Trabajador</th>
+              <th>Nombre</th>
+              <th>Puesto</th>
+              <th>Área</th>
+              <th>Correo</th>
+              <th>Credencial</th>
+              <th>Fecha ingreso</th>
+              <th style="width:140px;">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Filas renderizadas por JS (elimina ejemplo estático) -->
+          </tbody>
+        </table>
+      </div>
+
+      <footer class="pager">
+        <div class="pager-left">
+          <span id="infoCantidad">Mostrando 1–50 de 333</span>
+        </div>
+        <div class="pager-right">
+          <button class="btn btn-small btn-outline" id="btnPrev">Anterior</button>
+          <button class="btn btn-small btn-outline" id="btnNext">Siguiente</button>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+<script src="js/gestion.js"></script>
+<script src="js/gestion-filtros.js"></script>
+<script src="js/filtros-ml.js"></script>
+
+</body>
+</html>

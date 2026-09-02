@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReclutamientoAlpha · Registro de Empleado</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <!-- Sidebar fija -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="./imagenes/image001.png" alt="Logo de la empresa">
+    </div>
+
+    <nav class="menu">
+      <div class="menu-group contratos">
+        <h3 class="group-title">Contratos</h3>
+        <ul>
+          <li><a href="#" data-contrato="sindicalizado_determinado">Contrato sindicalizado determinado</a></li>
+          <li><a href="#" data-contrato="contrato_empleado_determinado">Contrato empleado determinado</a></li>
+          <li><a href="#" data-contrato="sindicalizado_indeterminado">Contrato sindicalizado indeterminado</a></li>
+          <li><a href="#" data-contrato="contrato_empleado_indeterminado">Contrato empleado indeterminado</a></li>
+          
+        </ul>
+      </div>
+
+      <div class="menu-group documentos">
+  <h3 class="group-title">Documentos</h3>
+  <ul>
+    <li><a href="#" data-documento="credencial">Credencial</a></li>
+    <li><a href="#" data-documento="checklist">Check List</a></li>
+    <li><a href="#" data-documento="etiqueta">Etiqueta</a></li>
+    <li><a href="#" data-documento="evaluaciones">Evaluaciones</a></li>
+  </ul>
+</div>
+
+<div class="menu-group gestion">
+    <h3 class="group-title">Gestión</h3>
+    <ul>
+      <li><a href="gestion.html">Gestión de empleados</a></li>
+    </ul>
+  </div>
+    </nav>
+  </aside>
+
+  <!-- Contenido -->
+  <main class="content">
+    <header class="topbar">
+      <div class="buscador">
+        <input id="buscarEmpleado" type="search" placeholder="Presione para escribir" />
+        <ul id="resultadosBusqueda"></ul>
+      </div>
+    </header>
+
+    <div class="form-top-actions">
+      <button type="submit" form="frmEmpleado" class="btn btn-primary">Guardar</button>
+      <button type="button" id="btnNuevoTop" class="btn btn-secondary">Nuevo</button>
+    </div>
+
+    <form id="frmEmpleado" class="form-grid" novalidate>
+      <!-- Registro Empleado -->
+      <section class="card">
+      <h2>Registro Empleado</h2>
+
+
+       <div class="field field-full">
+    <label for="num_trabajador_top">Número de trabajador <span style="color:red;">*</span></label>
+    <input id="num_trabajador_top" 
+           name="num_trabajador" 
+           type="text" 
+           inputmode="numeric" 
+           maxlength="6"
+           pattern="[0-9]{1,6}"
+           required 
+           placeholder="6 dígitos (ej: 123456)" />
+    <small style="color:#666;">💡 Máximo 6 dígitos numéricos</small>
+  </div>
+
+        <div class="field">
+    <label for="nombre">
+      Nombre(s) 
+      <span style="color:red;">*</span>
+      <span style="font-weight:normal; color:#666; font-size:0.85rem;">
+        (Escribe todos los nombres)
+      </span>
+    </label>
+    <input id="nombre" 
+           name="nombre" 
+           type="text" 
+           required 
+           placeholder="Ej: Maria Luisa, Juan Carlos, Ana" />
+    <small style="color:#666;">
+    </small>
+  </div>
+
+        <div class="field">
+    <label for="apellidos">
+      Apellidos 
+      <span style="color:red;">*</span>
+      <span style="font-weight:normal; color:#666; font-size:0.85rem;">
+        (Paterno y Materno)
+      </span>
+    </label>
+    <input id="apellidos" 
+           name="apellidos" 
+           type="text" 
+           required 
+           placeholder="Ej: Lopez Cruz, García Hernández" />
+    <small style="color:#666;">
+    </small>
+  </div>
+
+        <div class="field">
+          <label for="correo">Correo electrónico</label>
+          <input id="correo" name="correo" type="email" placeholder="nombre@empresa.com" />
+        </div>
+
+        <div class="field">
+          <label for="sexo">Sexo</label>
+          <select id="sexo" name="sexo" required>
+            <option value="">Seleccione…</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+            <option value="X">No especifica</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="fecha_nacimiento">Fecha de nacimiento</label>
+          <input id="fecha_nacimiento" name="fecha_nacimiento" type="date" required />
+        </div>
+
+        <div class="field">
+          <label for="edad">Edad</label>
+          <input id="edad" name="edad" type="number" min="15" max="90" readonly />
+        </div>
+
+        <div class="field">
+          <label for="calle_numero">Calle y número</label>
+          <input id="calle_numero" name="calle_numero" type="text" />
+        </div>
+
+        <div class="field">
+          <label for="colonia">Colonia</label>
+          <input id="colonia" name="colonia" type="text" />
+        </div>
+
+         <div class="field">
+          <label for="municipio">Municipio</label>
+          <select id="municipio" name="municipio" required>
+            <option value="">Seleccione…</option>
+            <option>Acuamanala de Miguel Hidalgo</option>
+            <option>Amaxac de Guerrero</option>
+            <option>Apetatitlán de Antonio Carvajal</option>
+            <option>Apizaco</option>
+            <option>Chiautempan</option>
+            <option>Contla de Juan Cuamatzi</option>
+            <option>Cuaxomulco</option>
+            <option>Emiliano Zapata</option>
+            <option>Ixtacuixtla de Mariano Matamoros</option>
+            <option>Ixtenco</option>
+            <option>La Magdalena Tlaltelulco</option>
+            <option>Mazatecochco de José María Morelos</option>
+            <option>Muñoz de Domingo Arenas</option>
+            <option>Natívitas</option>
+            <option>Panotla</option>
+            <option>Papalotla de Xicohténcatl</option>
+            <option>San Damián Texoloc</option>
+            <option>San Francisco Tetlanohcan</option>
+            <option>San Jerónimo Zacualpan</option>
+            <option>San José Teacalco</option>
+            <option>San Juan Huactzinco</option>
+            <option>San Lorenzo Axocomanitla</option>
+            <option>San Pablo del Monte</option>
+            <option>Santa Catarina Ayometla</option>
+            <option>Santa Cruz Quilehtla</option>
+            <option>Santa Cruz Tlaxcala</option>
+            <option>Santa Isabel Xiloxoxtla</option>
+            <option>Tenancingo</option>
+            <option>Teolocholco</option>
+            <option>Tepeyanco</option>
+            <option>Tepetitla de Lardizábal</option>
+            <option>Tetla de la Solidaridad</option>
+            <option>Tetlatlahuca</option>
+            <option>Tlaxcala</option>
+            <option>Tlaxco</option>
+            <option>Totolac</option>
+            <option>Tzompantepec</option>
+            <option>Xaloztoc</option>
+            <option>Xaltocan</option>
+            <option>Xicohtzinco</option>
+            <option>Yauhquemehcan</option>
+            <option>Zacatelco</option>
+          </select>
+        </div>
+
+
+        <div class="field">
+  <label for="estado">Estado donde radicas</label>
+  <select id="estado" name="estado" required>
+    <option value="">Seleccione el estado...</option>
+    <option value="AS">Aguascalientes</option>
+    <option value="BC">Baja California</option>
+    <option value="BS">Baja California Sur</option>
+    <option value="CC">Campeche</option>
+    <option value="CL">Coahuila</option>
+    <option value="CM">Colima</option>
+    <option value="CS">Chiapas</option>
+    <option value="CH">Chihuahua</option>
+    <option value="DF">Ciudad de México</option>
+    <option value="DG">Durango</option>
+    <option value="GT">Guanajuato</option>
+    <option value="GR">Guerrero</option>
+    <option value="HG">Hidalgo</option>
+    <option value="JC">Jalisco</option>
+    <option value="MC">México</option>
+    <option value="MN">Michoacán</option>
+    <option value="MS">Morelos</option>
+    <option value="NT">Nayarit</option>
+    <option value="NL">Nuevo León</option>
+    <option value="OC">Oaxaca</option>
+    <option value="PL">Puebla</option>
+    <option value="QT">Querétaro</option>
+    <option value="QR">Quintana Roo</option>
+    <option value="SP">San Luis Potosí</option>
+    <option value="SL">Sinaloa</option>
+    <option value="SR">Sonora</option>
+    <option value="TC">Tabasco</option>
+    <option value="TS">Tamaulipas</option>
+    <option value="TL" selected>Tlaxcala</option>
+    <option value="VZ">Veracruz</option>
+    <option value="YN">Yucatán</option>
+    <option value="ZS">Zacatecas</option>
+    <option value="NE">Nacido en el Extranjero</option>
+  </select>
+</div>
+
+         <div class="field">
+  <label for="estado_nacimiento">Estado de nacimiento</label>
+  <select id="estado_nacimiento" name="estado_nacimiento">
+    <option value="">Seleccione...</option>
+   <option value="">Seleccione el estado...</option>
+    <option value="AS">Aguascalientes</option>
+    <option value="BC">Baja California</option>
+    <option value="BS">Baja California Sur</option>
+    <option value="CC">Campeche</option>
+    <option value="CL">Coahuila</option>
+    <option value="CM">Colima</option>
+    <option value="CS">Chiapas</option>
+    <option value="CH">Chihuahua</option>
+    <option value="DF">Ciudad de México</option>
+    <option value="DG">Durango</option>
+    <option value="GT">Guanajuato</option>
+    <option value="GR">Guerrero</option>
+    <option value="HG">Hidalgo</option>
+    <option value="JC">Jalisco</option>
+    <option value="MC">México</option>
+    <option value="MN">Michoacán</option>
+    <option value="MS">Morelos</option>
+    <option value="NT">Nayarit</option>
+    <option value="NL">Nuevo León</option>
+    <option value="OC">Oaxaca</option>
+    <option value="PL">Puebla</option>
+    <option value="QT">Querétaro</option>
+    <option value="QR">Quintana Roo</option>
+    <option value="SP">San Luis Potosí</option>
+    <option value="SL">Sinaloa</option>
+    <option value="SR">Sonora</option>
+    <option value="TC">Tabasco</option>
+    <option value="TS">Tamaulipas</option>
+    <option value="TL" selected>Tlaxcala</option>
+    <option value="VZ">Veracruz</option>
+    <option value="YN">Yucatán</option>
+    <option value="ZS">Zacatecas</option>
+    <option value="NE">Nacido en el Extranjero</option>
+  </select>
+</div>
+
+        <div class="field">
+          <label for="codigo_postal">Código postal</label>
+          <input id="codigo_postal" name="codigo_postal" type="text" maxlength="5" inputmode="numeric" />
+        </div>
+
+        <div class="field">
+          <label for="telefono">Teléfono</label>
+          <input id="telefono" name="telefono" type="tel" placeholder="10 dígitos" maxlength="10" inputmode="numeric" />
+        </div>
+
+       <div class="field">
+  <label for="credencial">Número de credencial</label>
+  <input id="credencial" name="credencial" type="text" placeholder="13 dígitos" maxlength="13" inputmode="numeric" />
+</div>
+
+        <div class="field">
+  <label for="estado_civil">Estado civil</label>
+  <select id="estado_civil" name="estado_civil">
+    <option value="">Seleccione...</option>
+    <option value="Soltero">Soltero</option>
+    <option value="Casado">Casado</option>
+    <option value="Unión libre">Unión libre</option>
+    <option value="Divorciado">Divorciado</option>
+    <option value="Viudo">Viudo</option>
+  </select>
+</div>
+
+        <div class="field">
+          <label for="escolaridad">Escolaridad</label>
+          <select id="escolaridad" name="escolaridad">
+            <option value="">Seleccione…</option>
+            <option>Ninguna</option>
+            <option>Primaria</option>
+            <option>Boleta</option>
+            <option>Secundaria</option>
+            <option>Bachillerato</option>
+            <option>Técnico</option>
+            <option>Licenciatura</option>
+            <option>Maestría</option>
+            <option>Doctorado</option>
+          </select>
+        </div>
+
+        <div class="field">
+  <label for="rfc">RFC</label>
+  <input id="rfc" name="rfc" type="text" maxlength="13" 
+         placeholder="12/13 caracteres" 
+         title="Campo editable - se genera automáticamente pero puedes cambiar" />
+  <small style="color: #666; font-size: 0.85rem;">💡 Se genera automáticamente, pero verifica con el documento real</small>
+</div>
+
+<div class="field">
+  <label for="curp">CURP</label>
+  <input id="curp" name="curp" type="text" maxlength="18" 
+         placeholder="18 caracteres" 
+         title="Campo editable - se genera automáticamente pero puedes cambiar" />
+  <small style="color: #666; font-size: 0.85rem;">💡 Se genera automáticamente, pero verifica con el documento real</small>
+</div>
+
+        <div class="field">
+          <label for="nss">NSS</label>
+          <input id="nss" name="nss" type="text" maxlength="11" placeholder="11 dígitos" inputmode="numeric" />
+        </div>
+
+        <div class="field">
+          <label for="fecha_ingreso">Fecha de ingreso</label>
+          <input id="fecha_ingreso" name="fecha_ingreso" type="date" required />
+        </div>
+
+        <div class="field">
+          <label for="area">Área</label>
+          <select id="area" name="area">
+            <option value="ADMINISTRACION">ADMINISTRACION</option>
+            <option value="ALMACEN_DE_MATERIA_PRIMA">ALMACEN DE MATERIA PRIMA</option>
+            <option value="ALMACEN_DE_PT">ALMACEN DE PT</option>
+            <option value="ALMACEN_LOTE">ALMACEN LOTE</option>
+            <option value="ASESOR_MANUFACTURA_Y_PROCESOS">ASESOR MANUFACTURA Y PROCESOS</option>
+            <option value="CLASIFICACION">CLASIFICACION</option>
+            <option value="CONTABILIDAD">CONTABILIDAD</option>
+            <option value="ESMALTADO">ESMALTADO</option>
+            <option value="GERENCIA_ADMINISTRATIVA">GERENCIA ADMINISTRATIVA</option>
+            <option value="HORNOS">HORNOS</option>
+            <option value="INFORMATICA">INFORMATICA</option>
+            <option value="INSPECCION">INSPECCION</option>
+            <option value="LABORATORIO">LABORATORIO</option>
+            <option value="LIMPIEZA">LIMPIEZA</option>
+            <option value="LOGISTICA_Y_EMBARQUES">LOGISTICA Y EMBARQUES</option>
+            <option value="MANTENIMIENTO">MANTENIMIENTO</option>
+            <option value="MOLDES_Y_MATRICES">MOLDES Y MATRICES</option>
+            <option value="NOMINAS">NOMINAS</option>
+            <option value="PASTAS">PASTAS</option>
+            <option value="PREPARACION_DE_ESMALTES">PREPARACION DE ESMALTES</option>
+            <option value="PRODUCCION">PRODUCCION</option>
+            <option value="PROYECTOS">PROYECTOS</option>
+            <option value="RECLUTAMIENTO_Y_SELECCION">RECLUTAMIENTO Y SELECCION</option>
+            <option value="RECURSOS_HUMANOS">RECURSOS HUMANOS</option>
+            <option value="SEGURIDAD_E_HIGIENE">SEGURIDAD E HIGIENE</option>
+            <option value="SERVICIO_MEDICO_Y_SEGURIDAD">SERVICIO MEDICO Y SEGURIDAD</option>
+            <option value="VACIADO_1">VACIADO 1</option>
+            <option value="VACIADO_6">VACIADO 6</option>
+            <option value="VACIADO_DE_PIEZA_CHICA">VACIADO DE PIEZA CHICA</option>
+            <option value="VACIADO_DE_PIEZA_CHICA_SPAGLESS">VACIADO DE PIEZA CHICA SPAGLESS</option>
+            <option value="VACIADO_DE_TAZA">VACIADO DE TAZA</option>
+            <option value="VACIADO_DE_TAZA_ONE_PIECE">VACIADO DE TAZA ONE PIECE</option>
+            <option value="VACIADO_DE_TAZA_SPAGLESS">VACIADO DE TAZA SPAGLESS</option>
+            <option value="VACIADO_I">VACIADO I</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="puesto">Puesto</label>
+          <select id="puesto" name="puesto">
+      <option value="ABASTECEDOR DE MATERIALES">ABASTECEDOR DE MATERIALES</option>
+      <option value="ADMINISTRACION G">ADMINISTRACION G</option>
+      <option value="AJUSTADOR">AJUSTADOR</option>
+      <option value="AJUSTADOR DE ESMALTES">AJUSTADOR DE ESMALTES</option>
+      <option value="AJUSTADOR_DE_PASTAS">AJUSTADOR DE PASTAS</option>
+      <option value="APRENDIZ_DE_ESMALTADO">APRENDIZ DE ESMALTADO</option>
+      <option value="APRENDIZ_DE_INSPECCION">APRENDIZ DE INSPECCION</option>
+      <option value="APRENDIZ_DE_MOLDERO">APRENDIZ DE MOLDERO</option>
+      <option value="APRENDIZ_DE_VACIADOR">APRENDIZ DE VACIADOR</option>
+      <option value="APRENDIZ_DE_VACIADOR_DE_TAZA">APRENDIZ DE VACIADOR DE TAZA</option>
+      <option value="APRENDIZ_DE_VACIADOR_DE_TAZA_ONE_PIECE">APRENDIZ DE VACIADOR DE TAZA ONE PIECE</option>
+      <option value="ARMADOR DE PALANCA">ARMADOR DE PALANCA</option>
+      <option value="ARMADOR_DE_TANQUE">ARMADOR DE TANQUE</option>
+      <option value="ARMADOR_DE_VALVULA">ARMADOR DE VALVULA</option>
+      <option value="ARMADOR DE VALVULA ONE PIECE">ARMADOR DE VALVULA ONE PIECE</option>
+      <option value="ASESOR">ASESOR</option>
+      <option value="AUDITOR_DE_CALIDAD">AUDITOR DE CALIDAD</option>
+      <option value="AUDITOR_DE_PROCESOS">AUDITOR DE PROCESOS</option>
+      <option value="AUXILIAR_DE_ALMACEN_MP">AUXILIAR DE ALMACEN MP</option>
+      <option value="AUXILIAR_DE_CONTABILIDAD">AUXILIAR DE CONTABILIDAD</option>
+      <option value="AUXILIAR_DE_CUENTAS_POR_PAGAR">AUXILIAR DE CUENTAS POR PAGAR</option>
+      <option value="AUXILIAR_DE_NOMINAS">AUXILIAR DE NOMINAS</option>
+      <option value="AUXILIAR_DE_RECLUTAMIENTO">AUXILIAR DE RECLUTAMIENTO</option>
+      <option value="AYUDANTE_DE_SOLDADOR">AYUDANTE DE SOLDADOR</option>
+      <option value="AYUDANTE_GENERAL">AYUDANTE GENERAL</option>
+      <option value="BOLETERO/PATINERO">BOLETERO/PATINERO</option>
+      <option value="CAMBIA_MOLDES">CAMBIA MOLDES</option>
+      <option value="CARRERO">CARRERO</option>
+      <option value="CHECADOR DE FUGA ONE PIECE">CHECADOR DE FUGA ONE PIECE</option>
+      <option value="CHECADOR DE FUGA TAZA ONE PIECE">CHECADOR DE FUGA TAZA ONE PIECE</option>
+      <option value="CHOFER">CHOFER</option>
+      <option value="CLASIFICADOR">CLASIFICADOR</option>
+      <option value="CONTADOR_GENERAL">CONTADOR GENERAL</option>
+      <option value="CONTROL_DE_PRODUCCION">CONTROL DE PRODUCCION</option>
+      <option value="COORDINADOR_DE_HORNOS">COORDINADOR DE HORNOS</option>
+      <option value="COORDINADOR_DE_MANTENIMIENTO">COORDINADOR DE MANTENIMIENTO</option>
+      <option value="COORDINADOR_DE_MOLDES_Y_MATRICES">COORDINADOR DE MOLDES Y MATRICES</option>
+      <option value="COORDINADOR_DE_PASTAS">COORDINADOR DE PASTAS</option>
+      <option value="COORDINADOR_DE_VACIADO_DE_TAZA">COORDINADOR DE VACIADO DE TAZA</option>
+      <option value="CRIBADOR">CRIBADOR</option>
+      <option value="ELECTROMECANICO">ELECTROMECANICO</option>
+      <option value="EMPACADOR">EMPACADOR</option>
+      <option value="ENCARGADA_DE_TRAFICO">ENCARGADA DE TRAFICO</option>
+      <option value="ENCARGADO_DE_APT/EMB_Y_LOTE">ENCARGADO DE APT/EMB Y LOTE</option>
+      <option value="ENFERMERA">ENFERMERA</option>
+      <option value="ESCANEADOR">ESCANEADOR</option>
+      <option value="ESCANEADORA">ESCANEADORA</option>
+      <option value="EMPACADOR">EMPACADOR</option>
+      <option value="ESMALTADOR">ESMALTADOR</option>
+      <option value="ESMERILADOR">ESMERILADOR</option>
+      <option value="ESTIBADOR/CARGADOR">ESTIBADOR/CARGADOR</option>
+      <option value="ELECTROMECANICO">ELECTROMECANICO</option>
+      <option value="GERENTE_DE_PRODUCCION">GERENTE DE PRODUCCION</option>
+      <option value="HORNERO">HORNERO</option>
+      <option value="INSPECTOR">INSPECTOR</option>
+      <option value="INSPECTOR_DE_TAPA">INSPECTOR DE TAPA</option>
+      <option value="INSTRUCTOR">INSTRUCTOR</option>
+      <option value="INTENDENTE">INTENDENTE</option>
+      <option value="LABORATORISTA">LABORATORISTA</option>
+      <option value="LIMPIA_PLACAS">LIMPIA PLACAS</option>
+      <option value="LOGO_FOSET">LOGO FOSET</option>
+      <option value="LOGO MARBELLA">LOGO MARBELLA</option>
+      <option value="MATRICERO">MATRICERO</option>
+      <option value="MECANICO_AUTOMOTRIZ">MECANICO AUTOMOTRIZ</option>
+      <option value="MOLDERO">MOLDERO</option>
+      <option value="MOLINERO">MOLINERO</option>
+      <option value="MONTACARGUISTA">MONTACARGUISTA</option>
+      <option value="PEGA_LOGO">PEGA LOGO</option>
+      <option value="PREPARADOR_DE_PASTAS">PREPARADOR DE PASTAS</option>
+      <option value="PRUEBA DE VACIO">PRUEBA DE VACIO</option>
+      <option value="RECABADOR_DE_TAPA">RECABADOR DE TAPA</option>
+      <option value="RECLUTAMIENTO_Y_SELECCION">RECLUTAMIENTO Y SELECCIÓN</option>
+      <option value="RECUPERADOR_ESMALTE">RECUPERADOR ESMALTE</option>
+      <option value="RECURSOS_HUMANOS">RECURSOS HUMANOS</option>
+      <option value="RESANADOR">RESANADOR</option>
+      <option value="RESP_PLANTA_DE_TRATAMIENTO">RESP. PLANTA DE TRATAMIENTO</option>
+      <option value="RESPONSABLE_DE_SEGURIDAD_E_HIGIENE">RESPONSABLE DE SEGURIDAD E HIGIENE</option>
+      <option value="REVISADOR_DE_ONE_PIECE">REVISADOR DE ONE PIECE</option>
+      <option value="RECUPERADOR">RECUPERADOR</option>
+      <option value="SECADOR">SECADOR</option>
+      <option value="SERVICIO_MEDICO">SERVICIO MEDICO</option>
+      <option value="SIFONERO">SIFONERO</option>
+      <option value="SOLDADOR">SOLDADOR</option>
+      <option value="SOPORTE_TECNICO">SOPORTE TECNICO</option>
+      <option value="SUPERVISOR_DE_ALMACEN_MP">SUPERVISOR DE ALMACEN MP</option>
+      <option value="SUPERVISOR_DE_CLASIFICACION">SUPERVISOR DE CLASIFICACION</option>
+      <option value="SUPERVISOR_DE_EMBARQUES">SUPERVISOR DE EMBARQUES</option>
+      <option value="SUPERVISOR_DE_ESMALTADO">SUPERVISOR DE ESMALTADO</option>
+      <option value="SUPERVISOR_DE_HORNOS">SUPERVISOR DE HORNOS</option>
+      <option value="SUPERVISOR_DE_INSPECCION">SUPERVISOR DE INSPECCION</option>
+      <option value="SUPERVISOR_DE_MANTENIMIENTO">SUPERVISOR DE MANTENIMIENTO</option>
+      <option value="SUPERVISOR_DE_MOLDES">SUPERVISOR DE MOLDES</option>
+      <option value="SUPERVISOR_DE_PASTAS">SUPERVISOR DE PASTAS</option>
+      <option value="SUPERVISOR_DE_PREP_DE_ESMALTES">SUPERVISOR DE PREP DE ESMALTES</option>
+      <option value="SUPERVISOR_DE_VACIADO_PZA_CHICA">SUPERVISOR DE VACIADO PZA CHICA</option>
+      <option value="SUPERVISOR_DE_VACIADO_TAZA">SUPERVISOR DE VACIADO TAZA</option>
+      <option value="SUPERVISOR_LOTE/APT">SUPERVISOR LOTE/APT</option>
+      <option value="TECNICO_DE_HORNOS">TECNICO DE HORNOS</option>
+      <option value="TINERO">TINERO</option>
+      <option value="TINERO DE ONE PIECE">TINERO DE ONE PIECE</option>
+      <option value="VACIADOR DE PEDESTAL">VACIADOR DE PEDESTAL</option>
+      <option value="VACIADOR_DE_LAVABO">VACIADOR DE LAVABO</option>
+      <option value="VACIADOR_DE_POSTES_Y_CUBRE_PIJAS">VACIADOR DE POSTES Y CUBRE PIJAS</option>
+      <option value="VACIADOR_DE_TANQUE">VACIADOR DE TANQUE</option>
+      <option value="VACIADOR_DE_TAPA">VACIADOR DE TAPA</option>
+      <option value="VACIADOR_DE_TAZA">VACIADOR DE TAZA</option>
+      <option value="VACIADOR_DE_TAZA_ONE_PIECE">VACIADOR DE TAZA ONE PIECE</option>
+      <option value="VACIADOR DE TAZA SPAGLESS">VACIADOR DE TAZA SPAGLESS</option>
+      <option value="VARIOS">VARIOS</option>
+          </select>
+        </div>
+
+<div class="field">
+  <label for="jefe">Jefe inmediato</label>
+  <div class="field-dual-container">
+    <select id="jefe_predeterminado" name="jefe_predeterminado">
+      <option value="">Seleccionar predeterminado</option>
+      <option value="ING. ZAMORA LOPEZ JOSE LUIS">ING. ZAMORA LOPEZ JOSE LUIS</option>
+      <option value="ING. HERNANDEZ HERNANDEZ NOE">ING. HERNANDEZ HERNANDEZ NOE</option>
+      <option value="ING. GONZALEZ RUIZ VALENTIN">ING. GONZALEZ RUIZ VALENTIN</option>
+      <option value="ING. ORDOÑEZ GARCIA MIGUEL ANGEL">ING. ORDOÑEZ GARCIA MIGUEL ANGEL</option>
+      <option value="ING. ARENAS VIEYRA RENATO">ING. ARENAS VIEYRA RENATO</option>
+      <option value="ING. LOPEZ ANGULO RUBEN">ING. LOPEZ ANGULO RUBEN</option>
+      <option value="ING. HERNANDEZ HERNANDEZ PEDRO">ING. HERNANDEZ HERNANDEZ PEDRO</option>
+      <option value="ING. HERNANDEZ RUGERIO ARTURO">ING. HERNANDEZ RUGERIO ARTURO</option>
+      <option value="ING. SALDAÑA AHUACTZIN SILVANA MARIA GUADALUPE">ING. SALDAÑA AHUACTZIN SILVANA MARIA GUADALUPE</option>
+      <option value="LIC. VILCHIS MORALES MONICA">LIC. VILCHIS MORALES MONICA</option>
+      <option value="LIC. GONZALEZ RUIZ FABIOLA JOSYANY">LIC. GONZALEZ RUIZ FABIOLA JOSYANY</option>
+      <option value="CP. NOE AQUIAHUATL TORRES">CP. NOE AQUIAHUATL TORRES</option>
+      <option value="RODRIGUEZ HERNANDEZ ESTEBAN">RODRIGUEZ HERNANDEZ ESTEBAN</option>
+      <option value="RODRIGUEZ TONIX JAZAEL">RODRIGUEZ TONIX JAZAEL</option>
+      <option value="TOVAR CONTRERAS JOSE LUIS">TOVAR CONTRERAS JOSE LUIS</option>
+      <option value="VAZQUEZ RUIZ TANIA DEL CARMEN">VAZQUEZ RUIZ TANIA DEL CARMEN</option>
+      <option value="BAUTISTA CUAHUTLE ADAN">BAUTISTA CUAHUTLE ADAN</option>
+      <option value="C. MARTINEZ ARAUJO ROLANDO">C. MARTINEZ ARAUJO ROLANDO</option>
+      <option value="CORONA PACHECO JIMMY">CORONA PACHECO JIMMY</option>
+      <option value="FLORES CORTES LEONARDO">FLORES CORTES LEONARDO</option>
+      <option value="otro">Otro (Especificar)</option>
+    </select>
+    <span>o</span>
+    <input id="jefe" name="jefe" type="text" placeholder="Ingresa manualmente" />
+  </div>
+  <small style="color:#666;">💡 Puedes seleccionar de la lista o escribir manualmente</small>
+</div>
+
+        <div class="field">
+  <label for="salario">Salario</label>
+  <div class="field-dual-container">
+    <select id="salario_predeterminado" name="salario_predeterminado">
+      <option value="">Seleccionar predeterminado</option>
+      <option value="282.21">$282.21 MXN</option>
+      <option value="286.16">$286.16 MXN</option>
+      <option value="278.80">$278.80 MXN</option>
+      <option value="otro">Otro (Ingresar manual)</option>
+    </select>
+    <span>o</span>
+    <input id="salario" name="salario" type="number" min="0" step="0.01" placeholder="Ingresa monto" />
+  </div>
+</div>
+
+        <div class="field">
+  <label for="tipo_nomina">Tipo de nómina</label>
+  <select id="tipo_nomina" name="tipo_nomina">
+    <option value="">Seleccione…</option>
+    <option>Semanal</option>
+    <option>Quincenal</option>
+    <option>Mensual</option>
+  </select>
+</div>
+      </section>
+
+      <!-- Datos Beneficiario -->
+      <section class="card">
+        <h2>Datos Beneficiario</h2>
+
+        <div class="field">
+          <label for="benef_nombre">Nombre del beneficiario</label>
+          <input id="benef_nombre" name="benef_nombre" type="text" />
+        </div>
+
+        <div class="field">
+          <label for="benef_telefono">Número de teléfono</label>
+          <input id="benef_telefono" name="benef_telefono" type="tel" maxlength="10" inputmode="numeric" />
+        </div>
+
+      <div class="field">
+  <label for="parentesco">Parentesco</label>
+  <div class="field-dual-container">
+    <select id="parentesco_predeterminado" name="parentesco_predeterminado">
+      <option value="">Seleccionar predeterminado</option>
+      <option value="padre">Padre</option>
+      <option value="madre">Madre</option>
+      <option value="hijo">Hijo</option>
+      <option value="hija">Hija</option>
+      <option value="conyuge">Cónyuge</option>
+      <option value="concubina">Concubina</option>
+      <option value="concubino">Concubino</option>
+      <option value="hermano">Hermano</option>
+      <option value="hermana">Hermana</option>
+      <option value="abuelo">Abuelo</option>
+      <option value="abuela">Abuela</option>
+      <option value="nieto">Nieto</option>
+      <option value="nieta">Nieta</option>
+      <option value="tio">Tío</option>
+      <option value="tia">Tía</option>
+      <option value="sobrino">Sobrino</option>
+      <option value="sobrina">Sobrina</option>
+      <option value="primo">Primo</option>
+      <option value="prima">Prima</option>
+      <option value="suegro">Suegro</option>
+      <option value="suegra">Suegra</option>
+      <option value="yerno">Yerno</option>
+      <option value="nuera">Nuera</option>
+      <option value="cuñado">Cuñado</option>
+      <option value="cuñada">Cuñada</option>
+      <option value="otro">Otro (Especificar)</option>
+    </select>
+    <span>o</span>
+    <input id="parentesco" name="parentesco" type="text" placeholder="Ingresa manualmente" />
+  </div>
+  <small style="color:#666;">💡 Puedes seleccionar de la lista o escribir manualmente</small>
+</div>
+  
+      <!-- Modal de confirmación -->
+      <div id="modalConfirm" class="modal hidden">
+        <div class="modal-content">
+          <p>Tienes cambios sin guardar. ¿Deseas guardarlos?</p>
+          <div class="actions">
+            <button id="mcGuardar">Guardar y continuar</button>
+            <button id="mcDescartar">Descartar</button>
+            <button id="mcCancelar">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal para seleccionar tipo de empleado (Etiqueta) -->
+<div id="modalTipoEmpleado" class="modal hidden">
+  <div class="modal-content">
+    <h3>Seleccionar tipo de empleado</h3>
+    <p>¿Qué tipo de etiqueta deseas generar?</p>
+    <div class="tipo-empleado-opciones">
+      <button id="btnEmpleado" class="btn btn-primary" data-tipo="E">
+        📄 Empleado (E)
+      </button>
+      <button id="btnSindicalizado" class="btn btn-secondary" data-tipo="S">
+        👷 Sindicalizado (S)
+      </button>
+    </div>
+    <button id="btnCancelarTipo" class="btn btn-outline" style="margin-top: 15px;">
+      Cancelar
+    </button>
+  </div>
+</div>
+<!--Modal para seleccionar tipo de evaluación -->
+<div id="modalTipoEvaluacion" class="modal hidden">
+  <div class="modal-content">
+    <h3>Seleccionar evaluación</h3>
+    <p>¿Qué evaluación deseas generar?</p>
+    <div class="tipo-empleado-opciones">
+      <button id="btnEval1" class="btn btn-primary" data-numero="1">
+        📋 Evaluación 1 (30 días)
+      </button>
+      <button id="btnEval2" class="btn btn-primary" data-numero="2">
+        📋 Evaluación 2 (60 días)
+      </button>
+      <button id="btnEval3" class="btn btn-primary" data-numero="3">
+        📋 Evaluación 3 (90 días)
+      </button>
+    </div>
+    <button id="btnCancelarEvaluacion" class="btn btn-outline" style="margin-top: 15px;">
+      Cancelar
+    </button>
+  </div>
+</div>
+
+      <!-- Botonera inferior -->
+      <footer class="actions">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" id="btnNuevoBottom" class="btn btn-secondary">Nuevo</button>
+      </footer>
+    </form>
+  </main>
+
+  <!-- Scripts -->
+  <script src="./js/widget-evaluaciones.js"></script>
+  <script type="module" src="./js/app.js"></script>
+<script type="module" src="./js/form-empleado.js"></script>
+</body>
+</html>
+
+
+<!-- En lugar de rutas absolutas, usa relativas -->
+

@@ -1,0 +1,17 @@
+{
+  "name": "reclutamientoalpha-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "server": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "docxtemplater": "^3.66.3",
+    "express": "^4.21.2",
+    "pizzip": "^3.2.0"
+  }
+}

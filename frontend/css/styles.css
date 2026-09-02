@@ -1,0 +1,532 @@
+/* =============================================
+   VARIABLES GLOBALES - Sistema de diseño
+   ============================================= */
+:root{
+  /* Colores principales - Tema verde corporativo */
+  --navy:#065f46;        /* Verde oscuro principal (sidebar) */
+  --blue:#059669;        /* Verde secundario (botones) */
+  --accent:#dc2626;      /* Rojo acento (alertas, destacados) */
+  --bg:#f5f7fb;          /* Color de fondo de la aplicación */
+  --card:#ffffff;        /* Fondo de tarjetas y formularios */
+  --text:#1b1f23;        /* Color de texto principal */
+  --white:#fff;          /* Blanco puro */
+  --muted:#8a8f98;       /* Texto secundario/deshabilitado */
+
+  /* Colores por grupos funcionales del sidebar */
+  --contratos:#10b981;   /* Verde claro - Grupo Contratos */
+  --documentos:#ef4444;  /* Rojo - Grupo Documentos */
+  --gestion:#06b6d4;     /* Cyan - Grupo Gestión */
+
+  /* Variables de diseño consistentes */
+  --radius:16px;         /* Border-radius estándar para todos los componentes */
+  --sidebar-w:260px;     /* Ancho fijo del sidebar lateral */
+}
+
+/* =============================================
+   RESET Y ESTILOS BASE
+   ============================================= */
+*{box-sizing:border-box} /* Modelo de caja consistente para todos los elementos */
+html,body{height:100%}   /* Altura completa para layout flex/grid */
+body{
+  margin:0;              /* Eliminar márgenes por defecto */
+  font-family:system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif; /* Fuentes del sistema para mejor rendimiento */
+  color:var(--text);     /* Color de texto usando variables */
+  background:var(--bg);  /* Fondo de la aplicación */
+}
+
+/* =============================================
+   SIDEBAR - Navegación lateral fija
+   ============================================= */
+.sidebar{
+  position:fixed;        /* Posición fija para siempre visible */
+  top:0; left:0;         /* Posicionado en esquina superior izquierda */
+  width:var(--sidebar-w);/* Ancho definido por variable */
+  height:100vh;          /* Altura completa de la ventana */
+  overflow:auto;         /* Scroll interno si el contenido excede */
+  background:var(--navy);/* Fondo verde oscuro */
+  color:#e6eef6;         /* Texto claro contrastante */
+  padding:16px;          /* Espaciado interno */
+  display:flex;          /* Flexbox para alineación vertical */
+  flex-direction:column; /* Elementos en columna */
+  gap:20px;              /* Espacio entre secciones del sidebar */
+  border-right:1px solid rgba(255,255,255,.08); /* Borde sutil a la derecha */
+}
+
+/* =============================================
+   LOGO - Marca de la aplicación
+   ============================================= */
+.logo{
+ 
+  display:flex; align-items:center; justify-content:center;
+  background: #efe8e8;           /* mismo gris que el buscador */
+  border:1px solid #e5e7eb;      /* (opcional) mismo borde suave del buscador */
+  border-radius:12px;
+  padding:12px;
+}
+.logo img{max-width:100%; height:auto; display:block} /* Imagen responsive */
+
+/* =============================================
+   BOTONES - Sistema de botones reutilizables
+   ============================================= */
+.btn{
+  border:0;              /* Sin borde por defecto */
+  background:var(--blue);/* Fondo verde */
+  color:var(--white);    /* Texto blanco */
+  padding:10px 16px;     /* Espaciado interno consistente */
+  border-radius:12px;    /* Esquinas redondeadas */
+  cursor:pointer;        /* Cursor pointer para indicar interactividad */
+  font-weight:600;       /* Texto en negrita */
+  transition:transform .05s ease, opacity .2s ease; /* Transiciones suaves */
+}
+.btn:hover{opacity:.92}  /* Efecto hover sutil */
+.btn:active{transform:scale(.98)} /* Efecto click - retroceso sutil */
+
+/* Variantes de botones */
+.btn-primary{background:var(--blue)}    /* Botón primario - verde */
+.btn-secondary{background:#6b7280}      /* Botón secundario - gris */
+
+/* =============================================
+   MENÚ - Navegación del sidebar
+   ============================================= */
+.menu{display:flex; flex-direction:column; gap:18px} /* Layout vertical con espacio */
+.menu-group{
+  background: rgba(255,255,255,.06); /* Fondo semitransparente para contraste */
+  padding:12px;          /* Espaciado interno */
+  border-radius:12px;    /* Esquinas redondeadas */
+}
+.group-title{
+  margin:0 0 8px 0;      /* Margen inferior solo */
+  font-size:.95rem;      /* Tamaño de texto ligeramente reducido */
+  color:#fff;            /* Texto blanco */
+  display:flex; align-items:center; gap:8px; /* Alineación horizontal con iconos */
+  letter-spacing:.3px;   /* Espaciado de letras para mejor legibilidad */
+}
+.menu-group ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;} /* Reset de lista y layout vertical */
+.menu-group a{
+  color:#e7efff; text-decoration:none; font-size:.9rem; display:flex; align-items:center; gap:8px; /* Enlaces con iconos */
+}
+.menu-group a::before{content:"•"; font-weight:700} /* Bullet personalizado */
+
+/* =============================================
+   VARIANTES DE GRUPOS - Colores identificativos
+   ============================================= */
+
+/* Grupo Contratos - Tema verde */
+.menu-group.contratos{ border-left:6px solid var(--contratos) } /* Borde lateral verde */
+.menu-group.contratos .group-title{ color:#cfd7ff } /* Color de título personalizado */
+.menu-group.contratos a::before{ color:var(--contratos) } /* Bullet verde */
+
+/* Grupo Documentos - Tema rojo */
+.menu-group.documentos{ border-left:6px solid var(--documentos) } /* Borde lateral rojo */
+.menu-group.documentos .group-title{ color:#dcfce7 } /* Color de título personalizado */
+.menu-group.documentos a::before{ color:var(--documentos) } /* Bullet rojo */
+
+/* Grupo Gestión - Tema cyan */
+.menu-group.gestion{ border-left:6px solid var(--gestion) } /* Borde lateral cyan */
+.menu-group.gestion .group-title{ color:#dbeafe } /* Color de título personalizado */
+.menu-group.gestion a::before{ color:var(--gestion) } /* Bullet cyan */
+
+/* Ajuste de espaciado para el grupo Gestión */
+.menu-group.gestion{ margin-top:-8px; } /* Reduce espacio superior para pegar al grupo anterior */
+
+/* =============================================
+   CONTENIDO PRINCIPAL - Área de trabajo
+   ============================================= */
+.content{
+  margin-left:var(--sidebar-w); /* Compensa el ancho del sidebar fijo */
+  padding:20px 28px;            /* Espaciado interno generoso */
+}
+
+/* =============================================
+   TOPBAR - Barra superior con buscador
+   ============================================= */
+.topbar{margin-bottom:10px;} /* Espacio inferior */
+.topbar input[type="search"]{
+  width:100%;                 /* Ancho completo */
+  padding:12px 14px;          /* Espaciado interno cómodo */
+  border-radius:12px;         /* Esquinas redondeadas */
+  border:1px solid #e5e7eb;   /* Borde sutil */
+  background:#efe8e8;         /* Fondo ligeramente gris */
+  color:#374151;              /* Color de texto */
+}
+
+/* =============================================
+   ACCIONES DE FORMULARIO - Botones superiores
+   ============================================= */
+.form-top-actions{
+  display:flex; gap:10px; justify-content:flex-end; /* Alineación a la derecha */
+  margin-bottom:10px;         /* Espacio inferior */
+}
+
+/* =============================================
+   LAYOUT DE FORMULARIO - Sistema grid
+   ============================================= */
+.form-grid{
+  display:grid;               /* Layout con CSS Grid */
+  grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
+  gap:22px;                   /* Espacio entre celdas */
+}
+
+/* Campo que ocupa ancho completo */
+.field-full{ grid-column: 1 / -1; } /* Se expande a través de todas las columnas */
+
+/* =============================================
+   TARJETAS - Contenedores de contenido
+   ============================================= */
+.card{
+  background:var(--card);     /* Fondo blanco */
+  border-radius:var(--radius);/* Esquinas redondeadas consistentes */
+  padding:18px;               /* Espaciado interno */
+  box-shadow:0 6px 18px rgba(0,0,0,.06); /* Sombra sutil para profundidad */
+}
+.card h2{
+  margin:0 0 12px;           /* Solo margen inferior */
+  font-size:1.25rem;         /* Tamaño de fuente aumentado */
+  color:#111827;             /* Color de texto oscuro */
+}
+
+/* =============================================
+   CAMPOS DE FORMULARIO - Inputs y labels
+   ============================================= */
+.field{display:flex; flex-direction:column; gap:6px; margin-bottom:10px;} /* Layout vertical con espacio */
+label{font-size:.9rem; color:#1f2937;} /* Labels más pequeños y color específico */
+input, select{
+  padding:10px 12px;         /* Espaciado interno cómodo */
+  border-radius:10px;        /* Esquinas redondeadas */
+  border:1px solid #d1d5db;  /* Borde gris claro */
+  outline:none;              /* Eliminar outline por defecto */
+  background:#fff;           /* Fondo blanco */
+}
+
+/* Estados de focus para inputs */
+input:focus, select:focus{
+  border-color:var(--blue);  /* Borde verde al focus */
+  box-shadow:0 0 0 3px rgba(0,180,216,.15); /* Sombra exterior verde sutil */
+}
+
+/* =============================================
+   BOTONERA INFERIOR - Acciones del formulario
+   ============================================= */
+.actions{
+  grid-column: 1 / -1;       /* Ocupa todas las columnas del grid */
+  display:flex; gap:10px; justify-content:flex-end; margin-top:6px; /* Alineación derecha */
+}
+
+/* =============================================
+   DISEÑO RESPONSIVE - Adaptación a dispositivos
+   ============================================= */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 980px){
+  :root{ --sidebar-w:220px; } /* Sidebar más estrecho */
+  .form-grid{grid-template-columns:1fr} /* Formulario en una sola columna */
+}
+
+/* Móviles */
+@media (max-width: 720px){
+  .sidebar{position:static; height:auto; width:auto} /* Sidebar deja de ser fijo */
+  .content{margin-left:0} /* Contenido ocupa ancho completo */
+}
+
+/* =============================================
+   RESULTADOS DE BÚSQUEDA - Lista de empleados
+   ============================================= */
+.resultados {
+  margin: 8px 0 16px;        /* Márgenes verticales */
+  padding: 0;                /* Sin padding interno */
+  list-style: none;          /* Sin viñetas de lista */
+  max-height: 220px;         /* Altura máxima con scroll */
+  overflow: auto;            /* Scroll cuando hay muchos resultados */
+  border: 1px solid #333;    /* Borde definido */
+  border-radius: 10px;       /* Esquinas redondeadas */
+}
+.resultados .item-res {
+  padding: 8px 12px;         /* Espaciado interno para cada item */
+  cursor: pointer;           /* Indicador de que es clickeable */
+}
+.resultados .item-res:hover {
+  background: rgba(255,255,255,0.06); /* Fondo sutil al hover */
+}
+
+/* =============================================
+   MODALES - Ventanas emergentes
+   ============================================= */
+.modal { 
+  position: fixed; inset: 0;  /* Cubre toda la pantalla */
+  display: flex; align-items: center; justify-content: center; /* Centrado perfecto */
+  background: rgba(0,0,0,0.45); /* Fondo semitransparente oscuro */
+  z-index: 9999;              /* Por encima de todo */
+}
+.modal.hidden { display: none; } /* Clase utilitaria para ocultar */
+.modal-content {
+  background: #141414;        /* Fondo oscuro */
+  color: #fff;                /* Texto blanco */
+  border: 1px solid #2a2a2a;  /* Borde oscuro */
+  border-radius: 14px;        /* Esquinas redondeadas */
+  padding: 18px;              /* Espaciado interno */
+  width: min(92vw, 420px);    /* Ancho responsive con máximo */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Sombra pronunciada */
+}
+.modal-content .actions {
+  display: flex; gap: 10px; justify-content: flex-end; margin-top: 14px; /* Botones alineados a la derecha */
+}
+.modal-content button {
+  border: 1px solid #444; background: #1e1e1e; color: #fff; /* Botones oscuros */
+  padding: 8px 12px; border-radius: 10px; cursor: pointer; /* Estilo consistente */
+}
+.modal-content button:hover {
+  filter: brightness(1.15); /* Efecto hover con brillo */
+}
+
+/* =============================================
+   RESULTADOS DE BÚSQUEDA MEJORADOS - Estilos actualizados
+   ============================================= */
+#resultadosBusqueda{
+  list-style: none;           /* Sin viñetas */
+  margin: .5rem 0 1rem;       /* Márgenes específicos */
+  padding: 0;                 /* Sin padding */
+  border: 1px solid #cfd8dc;  /* Borde gris claro */
+  border-radius: 10px;        /* Esquinas redondeadas */
+  background: #fff;           /* Fondo blanco */
+  max-height: 360px;          /* Altura máxima aumentada */
+  overflow: auto;             /* Scroll interno */
+  box-shadow: 0 4px 18px rgba(0,0,0,.06); /* Sombra sutil */
+}
+
+#resultadosBusqueda .item-res{
+  display: flex;              /* Layout flex para alineación horizontal */
+  align-items: center;        /* Centrado vertical */
+  gap: 12px;                  /* Espacio entre elementos */
+  padding: 10px 14px;         /* Espaciado interno generoso */
+  cursor: pointer;            /* Indicador de clickeable */
+}
+
+#resultadosBusqueda .item-res .num{
+  width: 72px;                /* Ancho fijo para números */
+  min-width: 72px;            /* Ancho mínimo */
+  text-align: right;          /* Alineación a la derecha */
+  font-weight: 700;           /* Negrita */
+  font-variant-numeric: tabular-nums; /* Números con espaciado consistente */
+  color: #053b67;             /* Color azul oscuro */
+}
+
+#resultadosBusqueda .item-res .name{
+  flex: 1;                    /* Ocupa el espacio restante */
+  color: #1f2937;             /* Color de texto */
+  letter-spacing: .2px;       /* Espaciado de letras sutil */
+}
+
+#resultadosBusqueda .item-res:hover,
+#resultadosBusqueda .item-res.is-active{
+  background: rgba(5, 96, 160, .08); /* Fondo azul sutil al hover/activo */
+}
+
+/* =============================================
+   ANIMACIONES - Efectos visuales
+   ============================================= */
+
+/* Flash al guardar formulario */
+.form-flash{
+  animation: formFlash 1200ms ease-out 1; /* Animación única */
+}
+@keyframes formFlash{
+  0%   { box-shadow: 0 0 0 0 rgba(5,96,160,.0); } /* Inicio transparente */
+  30%  { box-shadow: 0 0 0 6px rgba(5,96,160,.18); } /* Máxima expansión */
+  100% { box-shadow: 0 0 0 0 rgba(5,96,160,.0); } /* Vuelve a transparente */
+}
+
+/* =============================================
+   NORMALIZACIÓN SIDEBAR - Elementos de navegación
+   ============================================= */
+.sidebar-nav ul,
+.sidebar-list {
+  list-style: none;          /* Sin viñetas */
+  margin: 0;                 /* Sin márgenes */
+  padding: 0;                /* Sin padding */
+}
+
+.sidebar-nav li {
+  margin: 0;                 /* Elimina separación vertical extra */
+}
+
+/* Enlaces como botones en sidebar */
+.sidebar-nav .nav-link {
+  display: flex;             /* Layout flex */
+  align-items: center;       /* Centrado vertical */
+  gap: 8px;                  /* Espacio entre icono y texto */
+  padding: 8px 12px;         /* Espaciado interno */
+  border-radius: 10px;       /* Esquinas redondeadas */
+  color: #e5e7eb;            /* Texto gris claro */
+  text-decoration: none;     /* Sin subrayado */
+  line-height: 1.2;          /* Altura de línea */
+  opacity: .95;              /* Ligeramente transparente */
+  transition: background .15s ease, color .15s ease, opacity .15s ease; /* Transiciones suaves */
+}
+
+.sidebar-nav .nav-link:hover,
+.sidebar-nav .nav-link:focus {
+  background: rgba(255,255,255,.10); /* Fondo sutil al interactuar */
+  color: #fff;               /* Texto blanco */
+  outline: none;             /* Sin outline por defecto */
+}
+
+.sidebar-nav .nav-link:active {
+  opacity: .9;               /* Efecto de click */
+}
+
+/* Iconos en enlaces de sidebar */
+.sidebar-nav .nav-link .icon {
+  font-size: 14px;           /* Tamaño pequeño */
+  opacity: .9;               /* Ligeramente transparente */
+}
+
+/* =============================================
+   SECCIÓN GESTIÓN ESPECÍFICA - Estilos particulares
+   ============================================= */
+#gestion-section {
+  margin-top: 8px;           /* Margen superior reducido */
+}
+.sidebar-section + #gestion-section {
+  margin-top: 8px !important; /* Especifidad aumentada */
+}
+#gestion-section ul {
+  padding-left: 0 !important; /* Eliminar padding izquierdo */
+}
+#gestion-section li {
+  position: relative;         /* Para posicionar el pseudo-elemento */
+  padding-left: 14px;         /* Espacio para el bullet */
+}
+#gestion-section li::before {
+  content: "";               /* Bullet personalizado */
+  position: absolute;         /* Posicionamiento absoluto */
+  left: 0; top: 50%;         /* Alineación vertical */
+  width: 6px; height: 6px;   /* Tamaño pequeño */
+  border-radius: 50%;        /* Forma circular */
+  background: #22c55e;       /* Color verde */
+  transform: translateY(-50%); /* Centrado perfecto vertical */
+  opacity: .95;              /* Ligeramente transparente */
+}
+
+/* =============================================
+   CAMPOS DE DOCUMENTOS - RFC y CURP con generación automática
+   ============================================= */
+#rfc[data-auto-generated="true"],
+#curp[data-auto-generated="true"] {
+  background-color: #f0f9ff;  /* Fondo azul muy claro */
+  border-color: #93c5fd;      /* Borde azul */
+}
+
+#rfc:focus,
+#curp:focus {
+  border-color: #3b82f6;      /* Borde azul más intenso al focus */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); /* Sombra azul sutil */
+}
+
+/* Texto de ayuda en formularios */
+small {
+  display: block;             /* Ocupa toda la línea */
+  margin-top: 4px;            /* Espacio superior */
+}
+
+/* =============================================
+   MODAL TIPO EMPLEADO - Selección de tipo de etiqueta
+   ============================================= */
+.tipo-empleado-opciones {
+  display: flex;              /* Layout horizontal */
+  gap: 15px;                  /* Espacio entre opciones */
+  margin-top: 20px;           /* Espacio superior */
+  justify-content: center;    /* Centrado horizontal */
+  flex-wrap: wrap;            /* Permite wrap en pantallas pequeñas */
+}
+
+.tipo-empleado-opciones button {
+  flex: 1;                    /* Ocupa espacio disponible */
+  min-width: 150px;           /* Ancho mínimo */
+  padding: 15px 20px;         /* Espaciado interno generoso */
+  font-size: 16px;            /* Texto más grande */
+}
+
+/* =============================================
+   MODALES DUPLICADOS - Consolidación de estilos (evaluación)
+   ============================================= */
+/* Nota: Estos estilos están duplicados en el CSS original */
+.modal { 
+  position: fixed; inset: 0; 
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.45);
+  z-index: 9999;
+}
+.modal.hidden { display: none; }
+.modal-content {
+  background: #141414;
+  color: #fff;
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  padding: 18px;
+  width: min(92vw, 420px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* ========== CAMPOS DUALES (Select + Input) ========== */
+.field-dual-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.field-dual-container select,
+.field-dual-container input {
+  width: 100%;
+  min-width: 0; /* Permite que los elementos se encojan */
+}
+
+.field-dual-container > span {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Ajuste para campos field-full */
+.field.field-full {
+  grid-column: 1 / -1;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 980px) {
+  .field-dual-container {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .field-dual-container > span {
+    display: none; /* Ocultar "o" en móvil */
+  }
+}
+
+/* ========== VALIDACIÓN VISUAL DE INPUTS ========== */
+.input-valido {
+  border-color: #10b981 !important;
+  background-color: #f0fdf4 !important;
+}
+
+.input-invalido {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+}
+
+.input-incompleto {
+  border-color: #f59e0b !important;
+  background-color: #fffbeb !important;
+}
+
+/* Focus mejorado */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
